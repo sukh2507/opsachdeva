@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar - gold, matching the brand palette */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c9a24a;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6e1621;
+}
+
+/* ------------------------------------------------------------------ */
+/* PhotoBackdrop - fixed single-photo slideshow + translucent overlay */
+/* ------------------------------------------------------------------ */
+.photo-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* Translucent (not fully opaque) layer - the photo underneath stays
+   visible through it. Tune the alpha values here if it needs to be
+   more or less see-through. Warm cream tint instead of flat white to
+   match the brochure's ivory/gold palette. */
+.photo-backdrop-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(253, 250, 244, 0.86) 0%,
+    rgba(253, 250, 244, 0.8) 50%,
+    rgba(253, 250, 244, 0.86) 100%
+  );
+}
+
+/* Simple on-mount fade/slide for section wrappers (used on every page) */
+.section-fade-in {
+  animation: sectionFadeIn 0.7s ease-out both;
+}
+
+@keyframes sectionFadeIn {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ------------------------------------------------------------------ */
+/* Glassmorphism navbar                                                */
+/* ------------------------------------------------------------------ */
+.navbar-glass {
+  background: rgba(253, 250, 244, 0.32);
+  backdrop-filter: blur(18px) saturate(170%);
+  -webkit-backdrop-filter: blur(18px) saturate(170%);
+  border-bottom: 1px solid rgba(201, 162, 74, 0.25);
+}
+
+.navbar-glass.navbar-glass-scrolled {
+  background: rgba(253, 250, 244, 0.6);
+  box-shadow: 0 4px 24px rgba(45, 8, 13, 0.08);
+}
+
+/* ------------------------------------------------------------------ */
+/* Ornate maroon/gold frame for video cards (Jhankies / Singers)       */
+/* ------------------------------------------------------------------ */
+.ornate-frame {
+  position: relative;
+  border: 3px solid #6e1621;
+  border-radius: 0.75rem;
+  padding: 6px;
+  background: linear-gradient(135deg, #2d080d, #6e1621 60%, #2d080d);
+}
+
+.ornate-frame-inner {
+  border: 1px solid #c9a24a;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background: #000;
+}
+
+.ornate-corner {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #d9b565;
+  pointer-events: none;
+}
+.ornate-corner-tl { top: -2px; left: -2px; border-right: none; border-bottom: none; border-top-left-radius: 6px; }
+.ornate-corner-tr { top: -2px; right: -2px; border-left: none; border-bottom: none; border-top-right-radius: 6px; }
+.ornate-corner-bl { bottom: -2px; left: -2px; border-right: none; border-top: none; border-bottom-left-radius: 6px; }
+.ornate-corner-br { bottom: -2px; right: -2px; border-left: none; border-top: none; border-bottom-right-radius: 6px; }
