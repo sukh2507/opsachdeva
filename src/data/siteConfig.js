@@ -29,7 +29,8 @@ export const SITE_CONFIG = {
   ],
 
   contact: {
-    phone: '+91 98107 65637', // from brochure; second number 9999259078 also listed there
+    phone: '+91 98107 65637',
+    phone2: '+91 99992 59078',
     whatsapp: '919810765637', // TODO: confirm this is the WhatsApp-enabled number
     whatsappMessage: 'Hello OP Sachdeva & Party, I want to enquire about an event',
     email: 'hello@opsachdeva.com', // TODO: replace with real email

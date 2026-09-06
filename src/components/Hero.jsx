@@ -64,23 +64,16 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-white box-border pt-24 pb-12 md:pt-28"
+      className="relative min-h-screen w-full flex items-center justify-center overflow-hidden box-border pt-24 pb-12 md:pt-28"
     >
-      {/* Full-bleed - deliberately starts at the very top (behind the
-          glass navbar) so there's no plain-white gap anywhere in the
-          section; the navbar's own blur/translucency handles legibility
-          up there. Section content below is separately padded down so
-          it isn't visually covered by the navbar. */}
+      {/* Full-bleed - starts at the very top (behind the glass navbar)
+          so there's no plain background gap anywhere in the section. */}
       <div className="absolute inset-0 z-0">
         <PhotoSlideshow
           photos={[BRAND_ASSETS.heroBackground]}
-          intervalMs={3000}
-          transitionMs={1500}
           fit="cover"
           className="absolute inset-0"
         />
-        {/* Translucent white "sheet" wash so the hero photo reads clearly
-            while text stays legible. */}
         <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/30 to-white/50" />
       </div>
 
@@ -100,7 +93,7 @@ const Hero = () => {
                 stage >= 2 ? 'opacity-100 md:translate-x-24' : 'opacity-0 md:translate-x-0 translate-y-4 md:translate-y-0'
               }`}
             >
-              <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-maroon-700 via-gold-500 to-maroon-700 bg-clip-text text-transparent tracking-tight">
+              <h1 className="text-4xl sm:text-3xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-maroon-700 via-maroon-700 to-maroon-700 bg-clip-text text-transparent tracking-tight">
                 {SITE_CONFIG.brandName}
               </h1>
             </div>

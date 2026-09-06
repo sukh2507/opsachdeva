@@ -42,7 +42,7 @@ const ContactSection = () => {
 
     if (
       !SITE_CONFIG.enquiryFormEndpoint ||
-      SITE_CONFIG.enquiryFormEndpoint === 'PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE'
+      SITE_CONFIG.enquiryFormEndpoint === 'https://script.google.com/macros/s/AKfycbyOmc0AGlqQVKYCf7GW-zelSsex7I7AN1fo5teMMLMk0T5tnD-iCr6EaJCU5TU7wlyOOw/exec'
     ) {
       // Dev-time guard so this fails loudly instead of silently.
       console.error('Enquiry form endpoint is not configured. See src/data/siteConfig.js');
@@ -86,9 +86,17 @@ const ContactSection = () => {
           <h2 className="text-4xl md:text-6xl font-serif mt-8 mb-12">Book Your Event</h2>
 
           <div className="space-y-10">
-            <ContactInfoItem icon={MapPin} label="Find Us" value={SITE_CONFIG.contact.address} />
-            <ContactInfoItem icon={Mail} label="Email Us" value={SITE_CONFIG.contact.email} />
-            <ContactInfoItem icon={Phone} label="Call Us" value={SITE_CONFIG.contact.phone} />
+            {/* <ContactInfoItem icon={MapPin} label="Find Us" value={SITE_CONFIG.contact.address} /> */}
+            {/* <ContactInfoItem icon={Mail} label="Email Us" value={SITE_CONFIG.contact.email} /> */}
+            <ContactInfoItem
+              icon={Phone}
+              label="Call Us"
+              value={
+                SITE_CONFIG.contact.phone2
+                  ? `${SITE_CONFIG.contact.phone} / ${SITE_CONFIG.contact.phone2}`
+                  : SITE_CONFIG.contact.phone
+              }
+            />
           </div>
         </div>
 

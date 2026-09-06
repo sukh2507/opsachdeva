@@ -2,30 +2,42 @@ import React from 'react';
 import { SITE_CONFIG } from '../data/siteConfig';
 import { BRAND_ASSETS } from '../data/media';
 import PhotoSlideshow from './PhotoSlideshow';
-import SheetBackground from './SheetBackground';
 
 /**
  * AboutSection
  * Company story + years-of-legacy badge. The photo card is a smooth
- * 2-photo slideshow (BRAND_ASSETS.philosophyPhotos: cov1.jpeg / cov2.jpeg).
- * The section background is the original hero photo (bg.jpeg, now that
- * des1 has taken over the Hero background), fitted so it's never
- * cropped/overflowing, with a translucent white sheet over it.
+ * 2-photo slideshow (BRAND_ASSETS.philosophyPhotos: cov1.jpeg / cov2.jpeg)
+ * in a fixed-size frame. If cov1/cov2 aren't exactly the same aspect
+ * ratio as the frame, object-cover fills it edge-to-edge (no blank
+ * space) and crops from the BOTTOM of the photo (objectPosition: top)
+ * so nothing important near the top gets cut off.
+ *
+ * Section background is its own image (bg3.png), full-bleed with a
+ * translucent white wash, same treatment as Hero's bg2.png.
  */
 const AboutSection = () => {
   return (
-    <section id="about" className="relative py-20 overflow-hidden">
-      <SheetBackground src={BRAND_ASSETS.philosophyBackground} />
+    <section id="about" className="relative overflow-hidden pt-20 sm:pt-28 lg:pt-36 pb-20 sm:pb-28 lg:pb-36">
+      <div className="absolute inset-0 z-0">
+        <PhotoSlideshow
+          photos={[BRAND_ASSETS.philosophyBackground]}
+          fit="cover"
+          className="absolute inset-0"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/30 to-white/50" />
+      </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-10 lg:gap-20 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-10 lg:gap-20 items-center">
 
         <div className="relative group">
           <div className="absolute -inset-4 bg-gold-500/10 rounded-2xl scale-95 group-hover:scale-100 transition-transform duration-700" />
-          <div className="relative rounded-xl overflow-hidden shadow-2xl border border-gold-500/30">
+          <div className="relative rounded-xl overflow-hidden shadow-2xl border border-gold-500/30 bg-white">
             <PhotoSlideshow
               photos={BRAND_ASSETS.philosophyPhotos}
               intervalMs={3000}
               transitionMs={1500}
+              fit="cover"
+              objectPosition={['center', 'top']}
               className="relative w-full h-96 lg:h-[600px]"
             />
           </div>
@@ -55,7 +67,7 @@ const AboutSection = () => {
               <div key={event} className="flex gap-4 items-center">
                 <div className="w-1.5 h-1.5 bg-gold-500 rounded-full shrink-0" />
                 <p className="text-slate-800 font-medium">{event}</p>
-              </div>
+              </div>   
             ))}
           </div>
         </div>

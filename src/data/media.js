@@ -34,12 +34,13 @@ export const BRAND_ASSETS = {
   // Hero section full-bleed background, with a translucent white "sheet"
   // wash on top (see Hero.jsx). NOTE: extension guessed as .png to match
   // des2.png's naming - confirm the actual filename/extension in R2.
-  heroBackground: `${R2_BASE}/bg.jpeg`,
+  heroBackground: `${R2_BASE}/bg2.png`,
   // "Our Philosophy" section: card slideshow + a single fitted (not
   // cropped) background photo behind the whole section - reuses the
   // original hero photo now that des1 has replaced it up top.
   philosophyPhotos: [`${R2_BASE}/cov1.jpeg`, `${R2_BASE}/cov2.jpeg`],
-  philosophyBackground: `${R2_BASE}/bg.jpeg`,
+  // "Our Philosophy" section's own full-bleed background.
+  philosophyBackground: `${R2_BASE}/bg3.png`,
   // Jhankies/Singers pages: fitted design background + translucent
   // white sheet, same treatment "Our Philosophy" used to have.
   jhankiSingerBackground: `${R2_BASE}/des1.png`,

@@ -9,11 +9,12 @@ import { SITE_CONFIG } from '../data/siteConfig';
  */
 const FixedContactButtons = memo(() => {
   const [showPhonePopup, setShowPhonePopup] = useState(false);
-  const [copied, setCopied] = useState(false);
+  const [copiedNumber, setCopiedNumber] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
   const [showWhatsAppPopup, setShowWhatsAppPopup] = useState(false);
 
-  const { phone, whatsapp, whatsappMessage } = SITE_CONFIG.contact;
+  const { phone, phone2, whatsapp, whatsappMessage } = SITE_CONFIG.contact;
+  const phoneNumbers = [phone, phone2].filter(Boolean);
   const whatsappUrl = `https://wa.me/${whatsapp}?text=${encodeURIComponent(whatsappMessage)}`;
 
   useEffect(() => {
@@ -29,19 +30,19 @@ const FixedContactButtons = memo(() => {
     return () => clearTimeout(timer);
   }, []);
 
-  const handlePhoneClick = () => {
-    if (isMobile) window.location.href = `tel:${phone.replace(/\s/g, '')}`;
+  const handlePhoneClick = (number) => {
+    if (isMobile) window.location.href = `tel:${number.replace(/\s/g, '')}`;
   };
 
-  const copyToClipboard = () => {
+  const copyToClipboard = (number) => {
+    const setCopiedFlag = () => {
+      setCopiedNumber(number);
+      setTimeout(() => setCopiedNumber(null), 2000);
+    };
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(phone).then(() => {
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
-      });
+      navigator.clipboard.writeText(number).then(setCopiedFlag);
     } else {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      setCopiedFlag();
     }
   };
 
@@ -56,23 +57,30 @@ const FixedContactButtons = memo(() => {
         onMouseLeave={() => !isMobile && setShowPhonePopup(false)}
       >
         <div
-          className={`absolute bottom-full mb-3 w-max bg-white p-4 rounded-lg shadow-xl border border-gray-200 transition-all duration-300 origin-bottom-left ${
+          className={`absolute bottom-full mb-3 w-max max-w-[90vw] bg-white p-4 rounded-lg shadow-xl border border-gray-200 transition-all duration-300 origin-bottom-left space-y-3 ${
             showPhonePopup ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-90 translate-y-4 pointer-events-none'
           }`}
         >
-          <p className="font-semibold text-lg text-gray-800">{phone}</p>
-          <button
-            onClick={copyToClipboard}
-            className={`mt-3 w-full text-sm font-bold py-2 px-4 rounded transition-all duration-300 flex items-center justify-center ${
-              copied ? 'bg-green-500' : 'bg-maroon-700 hover:bg-maroon-800'
-            } text-white`}
-          >
-            {copied ? 'Copied!' : <><Copy size={14} className="mr-2" /> Copy</>}
-          </button>
+          {phoneNumbers.map((number) => (
+            <div key={number} onClick={() => handlePhoneClick(number)} className={isMobile ? 'cursor-pointer' : ''}>
+              <p className="font-semibold text-lg text-gray-800">{number}</p>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  copyToClipboard(number);
+                }}
+                className={`mt-1 w-full text-sm font-bold py-2 px-4 rounded transition-all duration-300 flex items-center justify-center ${
+                  copiedNumber === number ? 'bg-green-500' : 'bg-maroon-700 hover:bg-maroon-800'
+                } text-white`}
+              >
+                {copiedNumber === number ? 'Copied!' : <><Copy size={14} className="mr-2" /> Copy</>}
+              </button>
+            </div>
+          ))}
         </div>
 
         <button
-          onClick={handlePhoneClick}
+          onClick={() => handlePhoneClick(phone)}
           className="w-12 h-12 sm:w-14 sm:h-14 bg-maroon-700 hover:bg-maroon-800 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110"
           aria-label="Contact by phone"
         >

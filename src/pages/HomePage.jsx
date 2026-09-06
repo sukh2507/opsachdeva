@@ -6,6 +6,12 @@ import PortfolioPreview from '../components/PortfolioPreview';
 import ContactSection from '../components/ContactSection';
 import { GLOBAL_BACKDROP_PHOTOS } from '../data/media';
 
+/**
+ * HomePage
+ * ---------
+ * Hero uses its own background (bg2.png) and "Our Philosophy" uses its
+ * own (bg3.png) - each section is self-contained.
+ */
 const HomePage = () => {
   const { setBackdropPhotos } = useOutletContext();
 
