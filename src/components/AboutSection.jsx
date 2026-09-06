@@ -24,7 +24,7 @@ const AboutSection = () => {
           fit="cover"
           className="absolute inset-0"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/30 to-white/50" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/75 via-white/30 to-white/50" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-10 lg:gap-20 items-center">
@@ -41,9 +41,9 @@ const AboutSection = () => {
               className="relative w-full h-96 lg:h-[600px]"
             />
           </div>
-          <div className="absolute -bottom-10 -right-10 bg-white p-10 shadow-2xl rounded-2xl hidden md:block border border-gold-500/30">
-            <p className="text-maroon-700 font-serif text-5xl font-bold">{SITE_CONFIG.yearsOfLegacy}</p>
-            <p className="text-slate-400 text-xs uppercase tracking-widest mt-2">Years of Legacy</p>
+          <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 md:-bottom-10 md:-right-10 bg-white p-3 sm:p-4 md:p-10 shadow-2xl rounded-xl md:rounded-2xl border border-gold-500/30">
+            <p className="text-maroon-700 font-serif text-2xl sm:text-3xl md:text-5xl font-bold">{SITE_CONFIG.yearsOfLegacy}</p>
+            <p className="text-slate-400 text-[9px] sm:text-[10px] md:text-xs uppercase tracking-widest mt-1 md:mt-2">Years of Legacy</p>
           </div>
         </div>
 

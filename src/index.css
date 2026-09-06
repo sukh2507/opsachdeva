@@ -94,6 +94,15 @@ html {
   box-shadow: 0 4px 24px rgba(45, 8, 13, 0.08);
 }
 
+/* Mobile nav dropdown - glassmorphism using the brand blue (#2596be),
+   with enough opacity + blur that page content never reads through it. */
+.navbar-mobile-menu {
+  background-color: #feeee4;
+  backdrop-filter: blur(18px) saturate(170%);
+  -webkit-backdrop-filter: blur(18px) saturate(170%);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
 /* ------------------------------------------------------------------ */
 /* Ornate maroon/gold frame for video cards (Jhankies / Singers)       */
 /* ------------------------------------------------------------------ */

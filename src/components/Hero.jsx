@@ -74,7 +74,7 @@ const Hero = () => {
           fit="cover"
           className="absolute inset-0"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/30 to-white/50" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/30 to-white/75" />
       </div>
 
       <div className="relative z-10 flex flex-col items-center px-6 max-w-6xl mx-auto">
