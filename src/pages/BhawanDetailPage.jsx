@@ -3,6 +3,7 @@ import { Link, useParams, useOutletContext, Navigate } from 'react-router-dom';
 import { ArrowLeft, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { BHAWANS } from '../data/media';
 import OrnateFrame from '../components/OrnateFrame';
+import MediaVideo from '../components/MediaVideo';
 
 /**
  * BhawanDetailPage
@@ -17,8 +18,7 @@ import OrnateFrame from '../components/OrnateFrame';
 const BhawanDetailPage = () => {
   const { bhawanId } = useParams();
   const { setBackdropPhotos } = useOutletContext();
-  const [lightboxIndex, setLightboxIndex] = useState(null); // index into `photos`, or null when fully closed
-  const [lightboxVisible, setLightboxVisible] = useState(false); // drives the fade in/out
+  const [lightboxIndex, setLightboxIndex] = useState(null); // index into `photos`, or null when closed
 
   const bhawan = BHAWANS.find((b) => b.id === bhawanId);
   const photos = bhawan ? bhawan.media.filter((m) => m.type === 'image') : [];
@@ -32,18 +32,7 @@ const BhawanDetailPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bhawanId]);
 
-  const openLightbox = useCallback((index) => {
-    setLightboxIndex(index);
-    // Mount at opacity 0 first, then flip to visible on the next frame
-    // so the CSS transition actually animates the fade-in.
-    requestAnimationFrame(() => requestAnimationFrame(() => setLightboxVisible(true)));
-  }, []);
-
-  const closeLightbox = useCallback(() => {
-    setLightboxVisible(false); // start fade-out
-    setTimeout(() => setLightboxIndex(null), 250); // unmount once the fade finishes
-  }, []);
-
+  const closeLightbox = useCallback(() => setLightboxIndex(null), []);
   const showPrev = useCallback(
     (e) => {
       e?.stopPropagation();
@@ -100,7 +89,7 @@ const BhawanDetailPage = () => {
               {photos.map((photo, index) => (
                 <button
                   key={photo.url}
-                  onClick={() => openLightbox(index)}
+                  onClick={() => setLightboxIndex(index)}
                   className="group relative overflow-hidden rounded-lg sm:rounded-2xl aspect-square w-full bg-slate-100"
                 >
                   <img
@@ -123,7 +112,7 @@ const BhawanDetailPage = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 justify-items-center">
               {videos.map((video) => (
                 <OrnateFrame key={video.url} className="w-full max-w-lg">
-                  <video src={video.url} controls playsInline className="w-full aspect-video block" />
+                  <MediaVideo src={video.url} />
                 </OrnateFrame>
               ))}
             </div>
@@ -138,9 +127,7 @@ const BhawanDetailPage = () => {
       {/* Lightbox with left/right navigation + close */}
       {lightboxIndex !== null && photos[lightboxIndex] && (
         <div
-          className={`fixed inset-0 z-[9999] bg-black/95 flex items-center justify-center p-4 sm:p-8 transition-opacity duration-[250ms] ${
-            lightboxVisible ? 'opacity-100' : 'opacity-0'
-          }`}
+          className="fixed inset-0 z-[9999] bg-black/92 flex items-center justify-center p-4 sm:p-8"
           onClick={closeLightbox}
         >
           <button

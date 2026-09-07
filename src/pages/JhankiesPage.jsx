@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { JHANKIES_MEDIA, GLOBAL_BACKDROP_PHOTOS } from '../data/media';
 import OrnateFrame from '../components/OrnateFrame';
+import MediaVideo from '../components/MediaVideo';
 
 /**
  * JhankiesPage
@@ -34,7 +35,7 @@ const JhankiesPage = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 justify-items-center">
             {JHANKIES_MEDIA.map((item) => (
               <OrnateFrame key={item.url} className="w-full max-w-sm">
-                <video src={item.url} controls playsInline preload="metadata" className="w-full aspect-video block" />
+                <MediaVideo src={item.url} />
               </OrnateFrame>
             ))}
           </div>

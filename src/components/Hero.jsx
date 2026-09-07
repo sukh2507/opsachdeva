@@ -80,7 +80,7 @@ const Hero = () => {
                 stage >= 2 ? 'opacity-100 md:translate-x-24' : 'opacity-0 md:translate-x-0 translate-y-4 md:translate-y-0'
               }`}
             >
-              <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-serif font-bold text-maroon-700 tracking-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-maroon-700 tracking-tight">
                 {SITE_CONFIG.brandName}
               </h1>
             </div>

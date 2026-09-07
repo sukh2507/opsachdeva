@@ -38,8 +38,16 @@ const TILES = [
 
 const PortfolioPreview = () => {
   return (
-    <section id="portfolio" className="py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+    <section
+      id="portfolio"
+      className="relative py-20 bg-cover bg-center bg-no-repeat"
+      style={{
+        backgroundImage:
+          'url(https://pub-3e36b5a03039464ca9c238b74290d861.r2.dev/opsachdevaparty/off.png)',
+      }}
+    >
+      <div className="absolute inset-0 bg-white/10 pointer-events-none" />
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-12">
           <span className="text-maroon-700 uppercase tracking-widest text-xs font-bold">
             Here's a Glimpse of Our Events
@@ -57,20 +65,17 @@ const PortfolioPreview = () => {
             <Link
               key={tile.id}
               to={tile.path}
-              className="group relative overflow-hidden rounded-3xl aspect-[4/5] flex items-end shadow-2xl shadow-black/40 transition-all duration-500 hover:-translate-y-2 hover:shadow-black/60"
+              className="group relative overflow-hidden rounded-3xl aspect-[4/5] flex items-end shadow-lg"
             >
               {tile.coverImage ? (
                 <img
                   src={tile.coverImage}
                   alt={tile.title}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.2] group-active:scale-[1.2]"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
               ) : (
                 <div className="absolute inset-0 bg-gradient-to-br from-maroon-700 via-maroon-800 to-slate-900" />
               )}
-              {/* Default dimmed/shadowed look - fades away on hover/tap so
-                  the photo reads fully clear once it's zoomed in. */}
-              <div className="absolute inset-0 bg-black/35 transition-opacity duration-500 group-hover:opacity-0 group-active:opacity-0" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
 
               <div className="relative z-10 p-6 sm:p-8">

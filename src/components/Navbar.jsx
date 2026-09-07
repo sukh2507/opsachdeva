@@ -97,7 +97,7 @@ const Navbar = () => {
       </div>
 
       {isMobileMenuOpen && (
-        <div className="absolute top-full left-0 w-full navbar-glass navbar-glass-scrolled shadow-xl py-8 flex flex-col items-center gap-6 md:hidden">
+        <div className="absolute top-full left-0 w-full bg-[#fdfaf4] border-t border-gold-500/20 shadow-xl py-8 flex flex-col items-center gap-6 md:hidden">
           {NAV_ITEMS.map((item) => (
             <Link
               key={item.path}
