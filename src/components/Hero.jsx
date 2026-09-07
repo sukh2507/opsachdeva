@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
 import AnimatedLogo from './AnimatedLogo';
-import PhotoSlideshow from './PhotoSlideshow';
 import { SITE_CONFIG } from '../data/siteConfig';
-import { BRAND_ASSETS } from '../data/media';
 
 /**
  * Hero
@@ -66,17 +64,6 @@ const Hero = () => {
       id="home"
       className="relative min-h-screen w-full flex items-center justify-center overflow-hidden box-border pt-24 pb-12 md:pt-28"
     >
-      {/* Full-bleed - starts at the very top (behind the glass navbar)
-          so there's no plain background gap anywhere in the section. */}
-      <div className="absolute inset-0 z-0">
-        <PhotoSlideshow
-          photos={[BRAND_ASSETS.heroBackground]}
-          fit="cover"
-          className="absolute inset-0"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/30 to-white/75" />
-      </div>
-
       <div className="relative z-10 flex flex-col items-center px-6 max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row items-center justify-center relative mb-8 w-full">
           <div
@@ -93,7 +80,7 @@ const Hero = () => {
                 stage >= 2 ? 'opacity-100 md:translate-x-24' : 'opacity-0 md:translate-x-0 translate-y-4 md:translate-y-0'
               }`}
             >
-              <h1 className="text-4xl sm:text-3xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-maroon-700 via-maroon-700 to-maroon-700 bg-clip-text text-transparent tracking-tight">
+              <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-serif font-bold text-maroon-700 tracking-tight">
                 {SITE_CONFIG.brandName}
               </h1>
             </div>

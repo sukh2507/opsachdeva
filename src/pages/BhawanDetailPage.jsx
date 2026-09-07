@@ -17,7 +17,8 @@ import OrnateFrame from '../components/OrnateFrame';
 const BhawanDetailPage = () => {
   const { bhawanId } = useParams();
   const { setBackdropPhotos } = useOutletContext();
-  const [lightboxIndex, setLightboxIndex] = useState(null); // index into `photos`, or null when closed
+  const [lightboxIndex, setLightboxIndex] = useState(null); // index into `photos`, or null when fully closed
+  const [lightboxVisible, setLightboxVisible] = useState(false); // drives the fade in/out
 
   const bhawan = BHAWANS.find((b) => b.id === bhawanId);
   const photos = bhawan ? bhawan.media.filter((m) => m.type === 'image') : [];
@@ -31,7 +32,18 @@ const BhawanDetailPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bhawanId]);
 
-  const closeLightbox = useCallback(() => setLightboxIndex(null), []);
+  const openLightbox = useCallback((index) => {
+    setLightboxIndex(index);
+    // Mount at opacity 0 first, then flip to visible on the next frame
+    // so the CSS transition actually animates the fade-in.
+    requestAnimationFrame(() => requestAnimationFrame(() => setLightboxVisible(true)));
+  }, []);
+
+  const closeLightbox = useCallback(() => {
+    setLightboxVisible(false); // start fade-out
+    setTimeout(() => setLightboxIndex(null), 250); // unmount once the fade finishes
+  }, []);
+
   const showPrev = useCallback(
     (e) => {
       e?.stopPropagation();
@@ -88,7 +100,7 @@ const BhawanDetailPage = () => {
               {photos.map((photo, index) => (
                 <button
                   key={photo.url}
-                  onClick={() => setLightboxIndex(index)}
+                  onClick={() => openLightbox(index)}
                   className="group relative overflow-hidden rounded-lg sm:rounded-2xl aspect-square w-full bg-slate-100"
                 >
                   <img
@@ -126,7 +138,9 @@ const BhawanDetailPage = () => {
       {/* Lightbox with left/right navigation + close */}
       {lightboxIndex !== null && photos[lightboxIndex] && (
         <div
-          className="fixed inset-0 z-[9999] bg-black/92 flex items-center justify-center p-4 sm:p-8"
+          className={`fixed inset-0 z-[9999] bg-black/95 flex items-center justify-center p-4 sm:p-8 transition-opacity duration-[250ms] ${
+            lightboxVisible ? 'opacity-100' : 'opacity-0'
+          }`}
           onClick={closeLightbox}
         >
           <button

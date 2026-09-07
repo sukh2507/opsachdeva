@@ -9,6 +9,7 @@ export default {
       fontFamily: {
         serif: ['Playfair Display', 'serif'],
         sans: ['Plus Jakarta Sans', 'sans-serif'],
+        bodoni: ['Bodoni Moda', '"Bodoni 72"', 'serif'],
       },
       // Deep maroon + gold palette lifted from OP Sachdeva & Party's
       // brochure, paired with the site's existing cream/white base.

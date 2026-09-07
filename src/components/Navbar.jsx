@@ -78,7 +78,7 @@ const Navbar = () => {
               key={item.path}
               to={item.path}
               onClick={(e) => handleNavClick(item, e)}
-              className={`text-[13.8px] tracking-widest uppercase transition-colors ${
+              className={`text-[13.8px] font-serif tracking-widest uppercase transition-colors ${
                 isActive(item.path) ? 'text-maroon-700 font-bold' : 'text-slate-600 hover:text-maroon-700'
               }`}
             >
@@ -97,13 +97,13 @@ const Navbar = () => {
       </div>
 
       {isMobileMenuOpen && (
-        <div className="absolute top-full left-0 w-full navbar-mobile-menu py-8 flex flex-col items-center gap-6 md:hidden">
+        <div className="absolute top-full left-0 w-full navbar-glass navbar-glass-scrolled shadow-xl py-8 flex flex-col items-center gap-6 md:hidden">
           {NAV_ITEMS.map((item) => (
             <Link
               key={item.path}
               to={item.path}
               onClick={(e) => handleNavClick(item, e)}
-              className="text-lg font-serif text-maroon-700 hover:text-maroon-900 transition-colors"
+              className="text-lg font-serif text-slate-700 hover:text-maroon-700 transition-colors"
             >
               {item.label}
             </Link>

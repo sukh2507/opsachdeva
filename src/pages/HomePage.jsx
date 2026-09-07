@@ -6,12 +6,6 @@ import PortfolioPreview from '../components/PortfolioPreview';
 import ContactSection from '../components/ContactSection';
 import { GLOBAL_BACKDROP_PHOTOS } from '../data/media';
 
-/**
- * HomePage
- * ---------
- * Hero uses its own background (bg2.png) and "Our Philosophy" uses its
- * own (bg3.png) - each section is self-contained.
- */
 const HomePage = () => {
   const { setBackdropPhotos } = useOutletContext();
 
@@ -21,10 +15,27 @@ const HomePage = () => {
 
   return (
     <>
-      <Hero />
-      <div className="section-fade-in">
-        <AboutSection />
+      {/*
+        Hero + Philosophy now share one continuous background.
+        backgroundAttachment: 'fixed' keeps the image locked to the viewport
+        while both sections/content scroll normally over it.
+      */}
+      <div
+        className="relative w-full"
+        style={{
+          backgroundImage: 'linear-gradient(rgba(255,255,255,0.42), rgba(255,255,255,0.42)), url(https://pub-3e36b5a03039464ca9c238b74290d861.r2.dev/opsachdevaparty/bgs.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center center',
+          backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed',
+        }}
+      >
+        <Hero />
+        <div className="section-fade-in">
+          <AboutSection />
+        </div>
       </div>
+
       <div className="section-fade-in">
         <PortfolioPreview />
       </div>

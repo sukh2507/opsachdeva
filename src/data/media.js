@@ -31,16 +31,13 @@ const R2_BASE = 'https://pub-3e36b5a03039464ca9c238b74290d861.r2.dev/opsachdevap
 // folder, sit directly in the project root of the bucket.
 export const BRAND_ASSETS = {
   roundLogo: `${R2_BASE}/round.jpeg`,
-  // Hero section full-bleed background, with a translucent white "sheet"
-  // wash on top (see Hero.jsx). NOTE: extension guessed as .png to match
-  // des2.png's naming - confirm the actual filename/extension in R2.
-  heroBackground: `${R2_BASE}/bg2.png`,
-  // "Our Philosophy" section: card slideshow + a single fitted (not
-  // cropped) background photo behind the whole section - reuses the
-  // original hero photo now that des1 has replaced it up top.
+  // Hero + "Our Philosophy" share this ONE image as a sticky background
+  // (see HomePage.jsx) - it stays fixed in place while the content of
+  // both sections scrolls over it, then releases normally once the
+  // Portfolio cards section begins. Separate crop for phones.
+  stickyBackground: `${R2_BASE}/bgs.png`,
+  stickyBackgroundMobile: `${R2_BASE}/bgsmob.png`,
   philosophyPhotos: [`${R2_BASE}/cov1.jpeg`, `${R2_BASE}/cov2.jpeg`],
-  // "Our Philosophy" section's own full-bleed background.
-  philosophyBackground: `${R2_BASE}/bg3.png`,
   // Jhankies/Singers pages: fitted design background + translucent
   // white sheet, same treatment "Our Philosophy" used to have.
   jhankiSingerBackground: `${R2_BASE}/des1.png`,

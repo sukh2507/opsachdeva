@@ -12,21 +12,12 @@ import PhotoSlideshow from './PhotoSlideshow';
  * space) and crops from the BOTTOM of the photo (objectPosition: top)
  * so nothing important near the top gets cut off.
  *
- * Section background is its own image (bg3.png), full-bleed with a
- * translucent white wash, same treatment as Hero's bg2.png.
+ * No background of its own - shares Hero's sticky background image,
+ * rendered once by HomePage.jsx behind both sections.
  */
 const AboutSection = () => {
   return (
-    <section id="about" className="relative overflow-hidden pt-20 sm:pt-28 lg:pt-36 pb-20 sm:pb-28 lg:pb-36">
-      <div className="absolute inset-0 z-0">
-        <PhotoSlideshow
-          photos={[BRAND_ASSETS.philosophyBackground]}
-          fit="cover"
-          className="absolute inset-0"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/75 via-white/30 to-white/50" />
-      </div>
-
+    <section id="about" className="relative pt-20 sm:pt-28 lg:pt-36 pb-20 sm:pb-28 lg:pb-36">
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-10 lg:gap-20 items-center">
 
         <div className="relative group">

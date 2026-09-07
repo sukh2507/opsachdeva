@@ -22,7 +22,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row justify-between items-center gap-4">
         <div className="flex items-center gap-3">
           <AnimatedLogo className="w-6 h-6" />
-          <span className="text-white font-serif text-xl">{SITE_CONFIG.brandName}</span>
+          <span className="text-white font-bodoni font-bold text-xl">{SITE_CONFIG.brandName}</span>
         </div>
 
         <p className="text-slate-500 text-xs tracking-widest uppercase text-center">
