@@ -42,9 +42,8 @@ const ContactSection = () => {
 
     if (
       !SITE_CONFIG.enquiryFormEndpoint ||
-      SITE_CONFIG.enquiryFormEndpoint === 'https://script.google.com/macros/s/AKfycbyOmc0AGlqQVKYCf7GW-zelSsex7I7AN1fo5teMMLMk0T5tnD-iCr6EaJCU5TU7wlyOOw/exec'
+      SITE_CONFIG.enquiryFormEndpoint === 'PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE'
     ) {
-      // Dev-time guard so this fails loudly instead of silently.
       console.error('Enquiry form endpoint is not configured. See src/data/siteConfig.js');
       setStatus('error');
       return;
@@ -60,7 +59,6 @@ const ContactSection = () => {
       await fetch(SITE_CONFIG.enquiryFormEndpoint, {
         method: 'POST',
         mode: 'no-cors',
-        headers: { 'Content-Type': 'text/plain' },
         body: JSON.stringify({
           ...formData,
           submittedAt: new Date().toISOString(),

@@ -17,7 +17,7 @@ const PhotoBackdrop = ({ photos = [] }) => {
 
   return (
     <div className="photo-backdrop" aria-hidden="true">
-      <PhotoSlideshow photos={photos} intervalMs={3000} transitionMs={1500} className="absolute inset-0" />
+      <PhotoSlideshow photos={photos} intervalMs={5000} transitionMs={900} className="absolute inset-0" />
       <div className="photo-backdrop-overlay" />
     </div>
   );

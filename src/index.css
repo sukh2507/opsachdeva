@@ -137,3 +137,44 @@ html {
 .ornate-corner-tr { top: -2px; right: -2px; border-left: none; border-bottom: none; border-top-right-radius: 6px; }
 .ornate-corner-bl { bottom: -2px; left: -2px; border-right: none; border-top: none; border-bottom-left-radius: 6px; }
 .ornate-corner-br { bottom: -2px; right: -2px; border-left: none; border-top: none; border-bottom-right-radius: 6px; }
+/* --------------------------------------------------------------- */
+/* Performance helpers                                              */
+/* --------------------------------------------------------------- */
+.content-auto-section {
+  content-visibility: auto;
+  contain-intrinsic-size: 700px;
+}
+
+.media-fade-in {
+  animation: mediaFadeIn 420ms ease-out both;
+}
+
+@keyframes mediaFadeIn {
+  from { opacity: 0.2; }
+  to { opacity: 1; }
+}
+
+img {
+  image-rendering: auto;
+}
+
+/* Reduce expensive paint work on touch devices while keeping the
+   navbar visually translucent. */
+@media (max-width: 767px) {
+  .navbar-glass {
+    backdrop-filter: blur(10px) saturate(140%);
+    -webkit-backdrop-filter: blur(10px) saturate(140%);
+  }
+
+  .section-fade-in {
+    animation-duration: 0.45s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .section-fade-in,
+  .media-fade-in {
+    animation: none !important;
+  }
+}

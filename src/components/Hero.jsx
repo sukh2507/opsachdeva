@@ -17,6 +17,15 @@ const Hero = () => {
 
   const services = SITE_CONFIG.eventTypes;
 
+  const legacyHighlights = [
+    '35+ Years of Trusted Spiritual Legacy',
+    'Renowned Singers and Live Devotional Artists',
+    'Grand, Custom-designed Royal Bhawan Setup',
+    '100% Hassle-free Event Planning & Execution',
+    '7,000+ Grand Spiritual Events Successfully Delivered',
+    'Punctual, Professional & Seamless Management',
+  ];
+
   const scrollToAbout = () => {
     const aboutSection = document.getElementById('about');
     if (aboutSection) aboutSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -64,7 +73,7 @@ const Hero = () => {
       id="home"
       className="relative min-h-screen w-full flex items-center justify-center overflow-hidden box-border pt-24 pb-12 md:pt-28"
     >
-      <div className="relative z-10 flex flex-col items-center px-6 max-w-6xl mx-auto">
+      <div className="relative z-10 flex flex-col items-center px-6 max-w-6xl mx-auto -translate-y-10 sm:-translate-y-12 md:-translate-y-16 lg:-translate-y-20">
         <div className="flex flex-col md:flex-row items-center justify-center relative mb-8 w-full">
           <div
             className={`z-20 bg-white rounded-full p-2 transform transition-all duration-1000 ${
@@ -106,7 +115,7 @@ const Hero = () => {
             </div>
           </div>
 
-          <button
+              <button
             onClick={scrollToAbout}
             className={`mt-6 px-10 py-4 bg-white/80 border border-maroon-300 text-maroon-800 rounded-full text-sm tracking-widest uppercase transition-all shadow-sm flex items-center gap-3 mx-auto hover:scale-105 hover:bg-maroon-50 ${
               stage >= 4 ? 'opacity-100' : 'opacity-0'
@@ -117,11 +126,59 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-        <div className="w-px h-20 bg-gradient-to-b from-maroon-600 to-transparent opacity-40" />
+
+      {/*
+        Responsive marquee positioning:
+        - Phone: sits in the vertical space between Explore Our Events and the
+          floating Call / WhatsApp buttons.
+        - Laptop/Desktop: sits horizontally between the two floating buttons,
+          aligned close to their bottom level.
+      */}
+      <div
+        className="
+          absolute z-30 overflow-hidden bg-[#f8f3e8]/95
+          border-y border-maroon-700/15 shadow-sm
+          left-0 right-0 bottom-24 py-3
+          sm:left-24 sm:right-24 sm:bottom-6 sm:py-4
+          md:left-28 md:right-28
+          lg:left-32 lg:right-32
+        "
+      >
+        <div className="hero-marquee-track flex w-max items-center whitespace-nowrap">
+          {[...legacyHighlights, ...legacyHighlights].map((item, index) => (
+            <React.Fragment key={`${item}-${index}`}>
+              <span className="px-8 sm:px-12 md:px-16 font-serif text-sm sm:text-base md:text-lg font-bold text-maroon-700">
+                {item}
+              </span>
+              <span className="text-gold-500 text-base sm:text-lg" aria-hidden="true">✦</span>
+            </React.Fragment>
+          ))}
+        </div>
       </div>
+
+      <style>{`
+        .hero-marquee-track {
+          animation: heroMarquee 34s linear infinite;
+          will-change: transform;
+        }
+
+        @keyframes heroMarquee {
+          from {
+            transform: translateX(0);
+          }
+          to {
+            transform: translateX(-50%);
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .hero-marquee-track {
+            animation-play-state: paused;
+          }
+        }
+      `}</style>
     </section>
   );
 };
 
-export default Hero;
+export default Hero;  

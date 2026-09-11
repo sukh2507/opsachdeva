@@ -1,12 +1,5 @@
 import React, { useRef, useState } from 'react';
 
-/**
- * Simple Cloudflare R2 video player.
- *
- * The URL is assigned directly to the <video> element instead of using a
- * typed <source>. This lets the browser inspect the response/codec itself and
- * avoids rejecting an otherwise playable R2 object because of a MIME hint.
- */
 const MediaVideo = ({ src, className = '' }) => {
   const videoRef = useRef(null);
   const [hasError, setHasError] = useState(false);
@@ -14,7 +7,6 @@ const MediaVideo = ({ src, className = '' }) => {
   const retryVideo = () => {
     const video = videoRef.current;
     if (!video) return;
-
     setHasError(false);
     video.load();
   };
@@ -27,7 +19,7 @@ const MediaVideo = ({ src, className = '' }) => {
         src={src}
         controls
         playsInline
-        preload="metadata"
+        preload="none"
         className="w-full h-full block object-contain bg-black"
         onLoadedMetadata={() => setHasError(false)}
         onCanPlay={() => setHasError(false)}
